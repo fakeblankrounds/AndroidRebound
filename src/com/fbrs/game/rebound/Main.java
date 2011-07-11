@@ -19,15 +19,18 @@ import org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector.IPi
 import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.input.touch.detector.ScrollDetector;
-import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorListener;
+import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 import android.widget.Toast;
 
+import com.fbrs.game.rebound.render.AnimationBuilder;
 import com.fbrs.game.rebound.render.TextureLoad;
+import com.fbrs.rebound.abstraction.AnimationFactory;
 import com.fbrs.rebound.abstraction.TextureLoader;
 import com.fbrs.rebound.map.MapLoad;
+import com.fbrs.utils.math.LPoint;
 
 public class Main extends BaseGameActivity implements IOnSceneTouchListener, IScrollDetectorListener, IPinchZoomDetectorListener{
 
@@ -72,6 +75,7 @@ public class Main extends BaseGameActivity implements IOnSceneTouchListener, ISc
 		//load each sprite img.
 
 		TextureLoader.setTextureLoader(new TextureLoad());
+		AnimationFactory.SetImplementer(new AnimationBuilder());
 	}
 
 	@Override
@@ -110,6 +114,8 @@ public class Main extends BaseGameActivity implements IOnSceneTouchListener, ISc
 		MapLoad.map.RenderMap();
 		Main.mZoomCamera.setBounds(0, (MapLoad.map.MapDimX +1)*128, 0, (MapLoad.map.MapDimY + 1)*128);
 		Main.mZoomCamera.setBoundsEnabled(true);
+		
+		AnimationFactory.StartNewAnimation("commandcenter", new LPoint(0,0), new LPoint(100,100), 60);
 	}
 	
 	@Override

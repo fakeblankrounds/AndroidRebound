@@ -9,14 +9,19 @@ public class Animation implements IUpdateHandler{
 	private int s_x, s_y, delta_x,delta_y, t_frames, pass_frames;
 	private String sprite;
 	
-	public Animation(String texture, int start_x, int start_y, int finish_x, int finish_y, int frames)
+	public Animation(String texture, int start_x, int start_y, int finish_x, int finish_y, int frames, boolean existing)
 	{
 		s_x = start_x;
 		s_y = start_y;
 		delta_x = (finish_x - start_x) / frames;
 		delta_y = (finish_y - start_x) / frames;
-		sprite = TextureLoad.newSprite(start_x, start_y, 0, 1, texture, null);
-	}
+		t_frames = frames;
+		pass_frames = 0;
+		if(existing == false)
+			sprite = TextureLoad.newSprite(start_x, start_y, 0, 1, texture, null);
+		else
+			sprite = texture;
+	}	
 	
 	public int getX()
 	{
@@ -30,7 +35,7 @@ public class Animation implements IUpdateHandler{
 	
 	public void FrameUp()
 	{
-		pass_frames ++;
+		pass_frames++;
 	}
 	
 	public boolean Continue()
