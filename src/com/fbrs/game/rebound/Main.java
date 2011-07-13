@@ -30,7 +30,6 @@ import com.fbrs.game.rebound.render.TextureLoad;
 import com.fbrs.rebound.abstraction.AnimationFactory;
 import com.fbrs.rebound.abstraction.TextureLoader;
 import com.fbrs.rebound.map.MapLoad;
-import com.fbrs.utils.math.LPoint;
 
 public class Main extends BaseGameActivity implements IOnSceneTouchListener, IScrollDetectorListener, IPinchZoomDetectorListener{
 
@@ -115,7 +114,7 @@ public class Main extends BaseGameActivity implements IOnSceneTouchListener, ISc
 		Main.mZoomCamera.setBounds(0, (MapLoad.map.MapDimX +1)*128, 0, (MapLoad.map.MapDimY + 1)*128);
 		Main.mZoomCamera.setBoundsEnabled(true);
 		
-		AnimationFactory.StartNewAnimation("commandcenter", new LPoint(0,0), new LPoint(100,100), 60);
+		//AnimationFactory.StartNewAnimation("commandcenter", new LPoint(0,0), new LPoint(400,400), 60, AnimationType.explonential);
 	}
 	
 	@Override
@@ -172,6 +171,36 @@ public class Main extends BaseGameActivity implements IOnSceneTouchListener, ISc
 
             return true;
     }
+    
+    @Override
+    public void onBackPressed()
+    {
+    	super.onBackPressed();
+    	this.finish();
+    }
+    
+    @Override
+	public void onStart()
+	{
+		super.onStart();
+		
+		TextureLoader.ReloadTextures();
+		
+	}
+	
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		TextureLoader.ReloadTextures();
+	}
+	
+	@Override
+	public void onRestart()
+	{
+		super.onRestart();
+		TextureLoader.ReloadTextures();
+	}
 
 
 }

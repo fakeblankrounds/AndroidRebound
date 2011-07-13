@@ -21,6 +21,12 @@ public class TextureLoad extends TextureLoader{
 	private static HashMap<String, TextureRegion> textureloaded = new HashMap<String, TextureRegion>();
 	private static HashMap<String, Sprite> spriteMap = new HashMap<String, Sprite>();
 	private static int nameing;
+	
+	public static Sprite getSprite(String s)
+	{
+		return spriteMap.get(s);
+	}
+
 
 	public static TextureRegion loadNewTexture(String sprite, LPoint resolution) {
 		if(!textureloaded.containsKey(sprite))
@@ -38,8 +44,8 @@ public class TextureLoad extends TextureLoader{
 
 
 	}
-
-	public static void ReloadTextures()
+	@Override
+	public void resetTextures()
 	{
 		textureloaded.clear();
 	}
@@ -97,7 +103,7 @@ public class TextureLoad extends TextureLoader{
 		}
 		else
 		{
-			s = new Sprite(x, y, TextureLoad.loadNewTexture(img, new LPoint(128,128)));
+			s = new Sprite(x, y, TextureLoad.loadNewTexture(img, new LPoint(resx,resy)));
 		}
 
 		s.setRotation(rot);
